@@ -106,4 +106,6 @@ export class RolPermisoController {
   ): Promise<Count> {
     return this.rolRepository.permisos(id).delete(where);
   }
+
+
 }

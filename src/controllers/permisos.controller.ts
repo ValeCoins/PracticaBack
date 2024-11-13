@@ -80,24 +80,24 @@ export class PermisosController {
     return this.permisoRepository.find(filter);
   }
 
-  @patch('/permisos')
-  @response(200, {
-    description: 'Permiso PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
-  })
-  async updateAll(
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(Permiso, {partial: true}),
-        },
-      },
-    })
-    permiso: Permiso,
-    @param.where(Permiso) where?: Where<Permiso>,
-  ): Promise<Count> {
-    return this.permisoRepository.updateAll(permiso, where);
-  }
+  // @patch('/permisos')
+  // @response(200, {
+  //   description: 'Permiso PATCH success count',
+  //   content: {'application/json': {schema: CountSchema}},
+  // })
+  // async updateAll(
+  //   @requestBody({
+  //     content: {
+  //       'application/json': {
+  //         schema: getModelSchemaRef(Permiso, {partial: true}),
+  //       },
+  //     },
+  //   })
+  //   permiso: Permiso,
+  //   @param.where(Permiso) where?: Where<Permiso>,
+  // ): Promise<Count> {
+  //   return this.permisoRepository.updateAll(permiso, where);
+  // }
 
   @get('/permisos/{id}')
   @response(200, {

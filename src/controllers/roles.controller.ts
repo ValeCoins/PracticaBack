@@ -7,18 +7,19 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
 import {Rol} from '../models';
-import {RolRepository} from '../repositories';
+import {RolRepository} from './../repositories/rol.repository';
+
 
 export class RolesController {
   constructor(
@@ -76,24 +77,24 @@ export class RolesController {
     return this.rolRepository.find(filter);
   }
 
-  @patch('/rols')
-  @response(200, {
-    description: 'Rol PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
-  })
-  async updateAll(
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(Rol, {partial: true}),
-        },
-      },
-    })
-    rol: Rol,
-    @param.where(Rol) where?: Where<Rol>,
-  ): Promise<Count> {
-    return this.rolRepository.updateAll(rol, where);
-  }
+  // @patch('/rols')
+  // @response(200, {
+  //   description: 'Rol PATCH success count',
+  //   content: {'application/json': {schema: CountSchema}},
+  // })
+  // async updateAll(
+  //   @requestBody({
+  //     content: {
+  //       'application/json': {
+  //         schema: getModelSchemaRef(Rol, {partial: true}),
+  //       },
+  //     },
+  //   })
+  //   rol: Rol,
+  //   @param.where(Rol) where?: Where<Rol>,
+  // ): Promise<Count> {
+  //   return this.rolRepository.updateAll(rol, where);
+  // }
 
   @get('/rols/{id}')
   @response(200, {
@@ -144,7 +145,11 @@ export class RolesController {
   @response(204, {
     description: 'Rol DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
-    await this.rolRepository.deleteById(id);
+  async deleteById(@param.path.number('id') id: number): Promise<boolean> {
+    await this.rolRepository.deleteById(id, {activo:false,})
+    const rol= await this.rolRepository.findById(id)
+    console.log("aaaaaa",rol)
+    return rol.activo
+
   }
 }
