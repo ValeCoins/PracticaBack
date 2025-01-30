@@ -5,7 +5,14 @@ This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/
 
 ## Install dependencies
 
-By default, dependencies were installed when this application was generated.
+By default, dependencies were installed when this applicatio
+
+```python
+
+print("SAPOS")
+
+
+```
 Whenever dependencies in `package.json` are changed, run the following command:
 
 ```sh
